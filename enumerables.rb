@@ -117,28 +117,29 @@ module Enumerable
     array
   end
 
-  def my_inject(accumulator = nil, operation = nil, &block)
-    block = case operation
-            when Symbol
-              ->(acc, value) { acc.send(operation, value) }
-            when nil
-              block
-            else
-              raise ArgumentError, 'the operation provided must be a symbol'
-            end
-    if accumulator.nil?
-      ignore_first = true
-      accumulator = first
+  def my_inject(arg1 = nil, arg2 = nil)
+    to_a unless is_a?(Array)
+    accumulator = nil
+    operation = nil
+
+    if arg1.is_a?(Numeric)
+      accumulator = arg1
+      operation = arg2 if arg2.is_a?(Symbol)
     end
-    index = 0
-    my_each do |element|
-      accumulator = block.call(accumulator, element) unless ignore_first && index.zero?
-      index += 1
+    operation = arg1 if arg1.is_a?(Symbol)
+
+    if !operation.nil?
+      my_each do |element|
+        accumulator = accumulator ? accumulator.send(operation, element) : element
+      end
+    else
+      my_each do |element|
+        accumulator = accumulator ? yield(accumulator, element) : element
+      end
     end
     accumulator
   end
 end
-
 # rubocop: enable Metrics/ModuleLength
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
