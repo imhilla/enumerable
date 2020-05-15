@@ -129,7 +129,7 @@ module Enumerable
     operation = arg1 if arg1.is_a?(Symbol)
 
     if !operation.nil?
-      my_each do |element| 
+      my_each do |element|
         accumulator = accumulator ? accumulator.send(operation, element) : element
       end
     else
