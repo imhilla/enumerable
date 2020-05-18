@@ -144,7 +144,3 @@ module Enumerable
 end
 # rubocop: enable Metrics/ModuleLength
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-
-p [1,2,3,4,5].my_each { |a| a}
-
-p [1,2,3,4,5].my_each_with_index{ |a,b| b}
