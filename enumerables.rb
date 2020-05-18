@@ -14,6 +14,7 @@ module Enumerable
       end
       index += 1
     end
+    self
   end
 
   def my_each_with_index
@@ -24,6 +25,7 @@ module Enumerable
       yield(self[index], index)
       index += 1
     end
+    self
   end
 
 
