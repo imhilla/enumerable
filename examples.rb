@@ -1,4 +1,3 @@
-
 # tests
 [1, 2, 3].my_each do |n|
     text = "Current number is: #{n}"
