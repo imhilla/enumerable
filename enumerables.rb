@@ -109,12 +109,14 @@ module Enumerable
     end
   end
 
-  def my_map(&block)
-    return to_enum(:my_select) unless block_given?
-
+  def my_map(a_proc = nil)
     array = []
-    each do |i|
-      array << block.call(i)
+    if a_proc.is_a?(Proc)
+      my_each { |i| array.push(a_proc.call(i)) }
+    elsif block_given?
+      my_each { |i| array.push(yield(i)) }
+    else
+      return to_enum :my_map
     end
     array
   end
