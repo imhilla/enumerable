@@ -4,27 +4,28 @@ module Enumerable
   def my_each
     return to_enum :my_each unless block_given?
 
-    i = 0
-    while i < size
+    index = 0
+    while index < size
 
       case self.class.name
-      when 'Hash' then yield(keys[i], self[keys[i]])
-      when 'Array' then yield(self[i])
-      when 'Range' then yield(to_a[i])
+      when 'Hash' then yield(keys[index], self[keys[index]])
+      when 'Array' then yield(self[index])
+      when 'Range' then yield(to_a[index])
       end
-      i += 1
+      index += 1
     end
   end
 
   def my_each_with_index
-    return to_enum(:my_each_with_index) unless block_given?
+    return to_enum :my_each_with_index unless block_given?
 
-    i = 0
-    my_each do |num|
-      yield(num, i)
-      i += 1
+    index = 0
+    while index < size
+      yield(self[index], index)
+      index += 1
     end
   end
+
 
   def my_select
     return to_enum(:my_select) unless block_given?
@@ -142,3 +143,7 @@ module Enumerable
 end
 # rubocop: enable Metrics/ModuleLength
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
+p [1,2,3,4,5].my_each { |a| a}
+
+p [1,2,3,4,5].my_each_with_index{ |a,b| b}
