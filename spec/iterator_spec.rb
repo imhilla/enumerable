@@ -1,3 +1,5 @@
 require './enumerables.rb'
-describe Enumerable
+describe Enumerable do
+ describe "#my_each"
+ end
 end
