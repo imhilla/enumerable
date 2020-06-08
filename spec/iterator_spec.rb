@@ -44,6 +44,38 @@ describe Enumerable do
   end
 
   describe "my_all?" do
-    it 
+    it 'returns true when no block is given' do
+      expect([].my_all?).to eql(true)
+    end
+
+    it 'returns false if the block never returns true' do
+      expect([nil, true, 99].my_all?).to eql(false)
+    end
+
+    it 'returns false unless value matches pattern' do
+      expect(%w[ant bear cat].my_all?(/t/)).to eql(false)
+    end
+
+    it 'returns false unless value yields a value and matches pattern' do
+      expect(%w[ant bear cat].my_all? { |word| word.length >= 4 }).to eql(false)
+    end
+
+    it 'returns false unless value == pattern' do 
+      expect([1, 2i, 3.14].my_all?(Numeric)).to eql(true)
+    end
+  end
+
+  describe "#my_any?" do
+  it 'returns true if the block ever returns a value other than false or nil' do
+    expect([nil, true, 99].my_any?(Integer)).to eql(true)
+  end
+
+  it 'returns false if the block never returns true' do
+    expect(%w[ant bear cat].my_any?(/d/)).to eql(false)
+  end
+
+  it 'returns false unless value == pattern' do 
+    expect([nil, true, 99].my_any?).to eql(true)
+  end
   end
 end
