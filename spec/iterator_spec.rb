@@ -27,7 +27,7 @@ describe Enumerable do
   end
   describe "#my_select" do
     it 'enumerable when no block is given' do
-      expect((1..4).my_each).to be_instance_of(Enumerator)
+      expect((1..4).my_select).to be_instance_of(Enumerator)
     end
 
     it 'should return new array with selected values' do
@@ -41,6 +41,9 @@ describe Enumerable do
       c = options[:font_size] 
       expect(c).to eql(10)
     end
-   
+  end
+
+  describe "my_all?" do
+    it 
   end
 end
