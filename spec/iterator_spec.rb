@@ -66,16 +66,35 @@ describe Enumerable do
   end
 
   describe "#my_any?" do
-  it 'returns true if the block ever returns a value other than false or nil' do
-    expect([nil, true, 99].my_any?(Integer)).to eql(true)
+    it 'returns true if the block ever returns a value other than false or nil' do
+      expect([nil, true, 99].my_any?(Integer)).to eql(true)
+    end
+
+    it 'returns false if the block never returns true' do
+      expect(%w[ant bear cat].my_any?(/d/)).to eql(false)
+    end
+
+    it 'returns false unless value == pattern' do 
+      expect([nil, true, 99].my_any?).to eql(true)
+    end
+
+    it 'returns true if pattern value of block matches pattern given' do
+      expect(%w[ant bear cat].my_any? { |word| word.length >= 4 }).to eql(true)
+    end
   end
 
-  it 'returns false if the block never returns true' do
-    expect(%w[ant bear cat].my_any?(/d/)).to eql(false)
-  end
-
-  it 'returns false unless value == pattern' do 
-    expect([nil, true, 99].my_any?).to eql(true)
-  end
+  describe "#my_none?" do
+    it 'returns true if the block never returns true for all elements' do
+      expect(%w{ant bear cat}.my_none? { |word| word.length == 5 }).to eql(true)
+    end
+    it 'returns false if the block returns true for some elements' do
+      expect(%w{ant beard cat}.my_none? { |word| word.length == 5 }).to eql(false)
+    end
+    it 'method returns whether pattern === element for none of the collection members' do
+      expect([nil, false, true].my_none?).to eql(false)
+    end
+    it 'If the block is not given it will return true only if none of the collection members is true' do
+      expect([].my_none?).to eql(true)
+    end
   end
 end
