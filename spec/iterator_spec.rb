@@ -32,8 +32,15 @@ describe Enumerable do
 
     it 'should return new array with selected values' do
       a = [1,2,3,4,5]
-      b = a.select { |num|  num.even?  } 
+      b = a.my_select { |num|  num.even?  } 
       expect(b).not_to eql(a)
     end
+
+    it 'returns a new hash for which the block returns true' do
+      options = { font_size: 10, font_family: "Arial" }
+      c = options[:font_size] 
+      expect(c).to eql(10)
+    end
+   
   end
 end
