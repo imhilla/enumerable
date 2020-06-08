@@ -122,13 +122,16 @@ describe Enumerable do
   end
   describe "#my_inject" do
     it 'It passes each element in the collection will to the named method of memo when symbol is specified' do
-      expect((5..10).reduce(:+)).to eql(45) 
+      expect((5..10).my_inject(:+)).to eql(45) 
     end
     it 'if you specify a block, then for each element in enum the block is passed an accumulator value (memo) and the element' do
-      expect((5..10).inject { |sum, n| sum + n }).to eql(45)
+      expect((5..10).my_inject { |sum, n| sum + n }).to eql(45)
     end
-    it 'If you do not explicitly specify an initial value for memo, then the first element of collection is used as the initial value of memo' do
-      expect((5..10).reduce(1, :*) ).to eql(151200)
+    it 'combines all elements of enum by applying a binary operation, specified by a block or a symbol that names a method or operator' do
+      expect((5..10).my_inject(1, :*) ).to eql(151200)
+    end
+    it 'each element in enum the block is passed an accumulator value (memo) and the element' do
+      expect((5..10).inject(1) { |product, n| product * n }).to eql(151200)
     end
   end
 end
