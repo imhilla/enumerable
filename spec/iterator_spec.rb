@@ -16,5 +16,7 @@ describe Enumerable do
     it 'enumerable when no block is given' do
       expect((1..4).my_each).to be_instance_of(Enumerator)
      end
+
+    it 'calls a block with two arguments (item, index)'
   end
 end
