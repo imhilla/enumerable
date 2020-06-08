@@ -12,7 +12,7 @@ describe Enumerable do
       expect((number.my_each {|x| x * x})).to match(number)
     end
   end 
-  describe "my_each_with_index" do
+  describe "#my_each_with_index" do
     it 'enumerable when no block is given' do
       expect((1..4).my_each).to be_instance_of(Enumerator)
     end
@@ -24,5 +24,10 @@ describe Enumerable do
       end
       expect(hash).to include('bread' => 0, 'blueband' => 1, 'toothpaste' => 2)
     end
+  end
+  describe "#my_select" do
+  it 'enumerable when no block is given' do
+    expect((1..4).my_each).to be_instance_of(Enumerator)
+  end
   end
 end
