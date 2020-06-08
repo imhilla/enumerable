@@ -4,6 +4,9 @@ describe Enumerable do
   let(:string) { %w[cat bear rat] } 
 
  describe "#my_each" do
+ it 'enumerable when no block is given' do
+  expect((1..4).my_each).to be_instance_of(Enumerator)
+ end
  
  end
 end
