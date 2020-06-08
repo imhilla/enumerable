@@ -26,8 +26,14 @@ describe Enumerable do
     end
   end
   describe "#my_select" do
-  it 'enumerable when no block is given' do
-    expect((1..4).my_each).to be_instance_of(Enumerator)
-  end
+    it 'enumerable when no block is given' do
+      expect((1..4).my_each).to be_instance_of(Enumerator)
+    end
+
+    it 'should return new array with selected values' do
+      a = [1,2,3,4,5]
+      b = a.select { |num|  num.even?  } 
+      expect(b).not_to eql(a)
+    end
   end
 end
