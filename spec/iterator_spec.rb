@@ -107,5 +107,22 @@ describe Enumerable do
       ary = [1, 2, 4, 2]
       expect(ary.my_count(2)).to eql(2)
     end
+    it 'counts the number of elements yielding a true value' do
+      ary = [1, 2, 4, 2]
+      expect(ary.count{ |x| x%2==0 }).to eql(3)
+    end
+  end
+  describe "#my_map" do 
+    it 'returns a new array with the results of running block once for every element in enum' do
+      expect((1..4).map { |i| i*i }).to match([1, 4, 9, 16])
+    end
+    it 'enumerable when no block is given' do
+      expect((1..4).my_map).to be_instance_of(Enumerator)
+    end
+  end
+  describe "#my_inject" do
+    it 'It passes each element in the collection will to the named method of memo when symbol is specified' do
+      expect((5..10).reduce(:+)).to eql(45) 
+    end
   end
 end
