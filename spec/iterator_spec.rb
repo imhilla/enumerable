@@ -97,4 +97,15 @@ describe Enumerable do
       expect([].my_none?).to eql(true)
     end
   end
+
+  describe "#my_count" do 
+    it 'returns the number of items in enum through enumeration' do
+      ary = [1, 2, 4, 2]
+      expect(ary.my_count).to eql(4)
+    end
+    it 'returns the number of items in enum that are equal to item counted if an argument is given' do
+      ary = [1, 2, 4, 2]
+      expect(ary.my_count(2)).to eql(2)
+    end
+  end
 end
